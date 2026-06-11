@@ -106,6 +106,18 @@ export const activities: Activity[] = [
     description: "Find 10 different vehicles hidden in the grid.",
     tags: ["car", "truck", "plane", "train", "bike", "bus", "boat", "rocket", "scooter", "ship"],
   },
+  {
+    id: "crossword-animals-easy",
+    title: "Animal Crossword",
+    type: "crossword",
+    theme: "animals",
+    ageMin: 6,
+    ageMax: 10,
+    difficulty: "easy",
+    generated: true,
+    description: "Complete the crossword puzzle with animal names.",
+    tags: ["cat", "dog", "bird", "fish", "bear"],
+  },
 ];
 
 export function getActivities(filters?: {
