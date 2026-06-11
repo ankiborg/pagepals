@@ -1,7 +1,7 @@
 import { getActivityById } from "@/data/activities";
 import { notFound } from "next/navigation";
 import WordSearch from "@/components/activities/WordSearch";
-import PrintButton from "@/components/PrintButton";
+import PrintOptions from "@/components/PrintOptions";
 import Link from "next/link";
 
 interface Props {
@@ -42,8 +42,8 @@ export default async function ActivityPage({ params }: Props) {
           </span>
         </div>
 
-        {/* Print button */}
-        <PrintButton />
+        {/* Print options */}
+        <PrintOptions currentActivity={activity} />
 
         {/* Activity content */}
         <div className="bg-white rounded-2xl shadow-sm p-8 print:shadow-none print:p-0">

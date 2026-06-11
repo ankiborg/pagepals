@@ -24,3 +24,161 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* A4 Print Optimizations */
+@media print {
+  @page {
+    size: A4;
+    margin: 0.5in;
+  }
+
+  /* A4 Portrait Layout (1 activity) */
+  @page :first {
+    size: A4 portrait;
+  }
+
+  /* Reset page background and colors for print */
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Optimize main content area for A4 */
+  main {
+    background: white !important;
+    min-height: auto !important;
+  }
+
+  /* Activity page container optimization */
+  .max-w-4xl {
+    max-width: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Activity content container */
+  .bg-white.rounded-2xl.shadow-sm {
+    background: white !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Word search grid optimizations */
+  .inline-grid {
+    margin: 0 auto !important;
+    display: table !important;
+    border-collapse: collapse !important;
+  }
+
+  /* Grid cells */
+  .inline-grid > div {
+    width: 20px !important;
+    height: 20px !important;
+    border: 1px solid #000 !important;
+    display: table-cell !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
+    padding: 0 !important;
+  }
+
+  /* Title optimization */
+  h2 {
+    font-size: 18px !important;
+    margin-bottom: 8px !important;
+    text-align: center !important;
+    page-break-after: avoid !important;
+  }
+
+  /* Word list optimization */
+  .flex.flex-wrap.gap-2 {
+    display: block !important;
+    columns: 3 !important;
+    column-gap: 20px !important;
+    margin-top: 12px !important;
+  }
+
+  .flex.flex-wrap.gap-2 > span {
+    display: inline-block !important;
+    margin-bottom: 4px !important;
+    break-inside: avoid !important;
+    border: 1px solid #000 !important;
+    padding: 2px 6px !important;
+    font-size: 11px !important;
+  }
+
+  /* Prevent page breaks within activities */
+  .font-mono {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* A4 Landscape Layout (2 activities side-by-side) */
+  @page landscape {
+    size: A4 landscape;
+    margin: 0.5in;
+  }
+
+  /* Landscape mode: two activities side by side */
+  @media print and (orientation: landscape) {
+    @page {
+      size: A4 landscape;
+      margin: 0.5in;
+    }
+
+    /* Create two-column layout */
+    .print-two-column {
+      display: flex !important;
+      gap: 20px !important;
+      width: 100% !important;
+    }
+
+    .print-two-column .font-mono {
+      width: 48% !important;
+      flex-shrink: 0 !important;
+    }
+
+    /* Adjust grid size for landscape */
+    .inline-grid {
+      transform: scale(0.8) !important;
+      transform-origin: top left !important;
+    }
+
+    /* Smaller grid cells for landscape */
+    .inline-grid > div {
+      width: 16px !important;
+      height: 16px !important;
+      font-size: 10px !important;
+    }
+
+    /* Smaller titles for landscape */
+    h2 {
+      font-size: 14px !important;
+      margin-bottom: 6px !important;
+    }
+
+    /* Compact word list for landscape */
+    .flex.flex-wrap.gap-2 {
+      columns: 2 !important;
+      column-gap: 12px !important;
+      margin-top: 8px !important;
+    }
+
+    .flex.flex-wrap.gap-2 > span {
+      font-size: 9px !important;
+      padding: 1px 4px !important;
+      margin-bottom: 2px !important;
+    }
+  }
+
+  /* Print button specific styling */
+  .print\:hidden {
+    display: none !important;
+  }
+}
