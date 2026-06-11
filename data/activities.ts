@@ -106,6 +106,30 @@ export const activities: Activity[] = [
     description: "Find 10 different vehicles hidden in the grid.",
     tags: ["car", "truck", "plane", "train", "bike", "bus", "boat", "rocket", "scooter", "ship"],
   },
+  {
+    id: "secret-code-adventure-easy",
+    title: "Secret Adventure Code",
+    type: "secret-code",
+    theme: "animals",
+    ageMin: 6,
+    ageMax: 10,
+    difficulty: "easy",
+    generated: true,
+    description: "Decode a secret message about a brave animal adventure using Caesar cipher.",
+    tags: ["THE BRAVE CAT SAVES THE DAY"],
+  },
+  {
+    id: "secret-code-treasure-medium",
+    title: "Treasure Hunt Code",
+    type: "secret-code",
+    theme: "fantasy",
+    ageMin: 7,
+    ageMax: 11,
+    difficulty: "medium",
+    generated: true,
+    description: "Use symbol substitution to decode where the treasure is hidden.",
+    tags: ["FOLLOW THE MAP TO FIND GOLD"],
+  },
 ];
 
 export function getActivities(filters?: {

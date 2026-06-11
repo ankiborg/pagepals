@@ -1,6 +1,7 @@
 import { getActivityById } from "@/data/activities";
 import { notFound } from "next/navigation";
 import WordSearch from "@/components/activities/WordSearch";
+import SecretCode from "@/components/activities/SecretCode";
 import PrintButton from "@/components/PrintButton";
 import Link from "next/link";
 
@@ -55,7 +56,16 @@ export default async function ActivityPage({ params }: Props) {
             />
           )}
 
-          {activity.type !== "word-search" && (
+          {activity.type === "secret-code" && activity.tags && activity.tags[0] && (
+            <SecretCode
+              message={activity.tags[0]}
+              title={activity.title}
+              shift={3}
+              useSymbols={activity.id.includes("treasure")}
+            />
+          )}
+
+          {activity.type !== "word-search" && activity.type !== "secret-code" && (
             <div className="text-center text-gray-400 py-16">
               <p className="text-4xl mb-3">🚧</p>
               <p className="font-medium">This activity is coming soon!</p>
