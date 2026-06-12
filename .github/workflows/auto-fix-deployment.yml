@@ -8,23 +8,30 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       issues: write
+      contents: read
     steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.deployment.sha }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install and capture build error
+        run: |
+          npm ci
+          npm run build > /tmp/build-output.txt 2>&1 || true
+
       - name: Create fix issue
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          BUILD_ERROR=$(tail -40 /tmp/build-output.txt)
           gh issue create \
             --repo ${{ github.repository }} \
             --title "Fix: deployment failed on ${{ github.event.deployment.ref }}" \
-            --body "$(cat <<'EOF'
-          Vercel deployment failed.
-
-          **Environment:** ${{ github.event.deployment_status.environment }}
-          **Logs:** ${{ github.event.deployment_status.log_url }}
-          **Ref:** ${{ github.event.deployment.ref }}
-          **SHA:** ${{ github.event.deployment.sha }}
-
-          Check the log URL above for the exact error. Fix it and run `npm run build` before committing.
-          EOF
-          )" \
+            --body "$(printf 'Build failed on commit %s.\n\n**Error:**\n```\n%s\n```\n\nFix the error and run `npm run build` before committing.' \
+              '${{ github.event.deployment.sha }}' \
+              "$BUILD_ERROR")" \
             --label claude
