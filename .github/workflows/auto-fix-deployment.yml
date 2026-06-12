@@ -1,0 +1,30 @@
+name: Auto-fix failed deployment
+on:
+  deployment_status:
+
+jobs:
+  create-fix-issue:
+    if: github.event.deployment_status.state == 'failure'
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Create fix issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --repo ${{ github.repository }} \
+            --title "Fix: deployment failed on ${{ github.event.deployment.ref }}" \
+            --body "$(cat <<'EOF'
+          Vercel deployment failed.
+
+          **Environment:** ${{ github.event.deployment_status.environment }}
+          **Logs:** ${{ github.event.deployment_status.log_url }}
+          **Ref:** ${{ github.event.deployment.ref }}
+          **SHA:** ${{ github.event.deployment.sha }}
+
+          Check the log URL above for the exact error. Fix it and run `npm run build` before committing.
+          EOF
+          )" \
+            --label claude
