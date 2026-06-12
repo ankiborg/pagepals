@@ -36,4 +36,8 @@ export interface Activity {
   filePath?: string;
   description: string;
   tags?: string[];
+  clues?: {
+    across: Array<{ number: number; clue: string; answer: string }>;
+    down: Array<{ number: number; clue: string; answer: string }>;
+  };
 }

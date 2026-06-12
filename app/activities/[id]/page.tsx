@@ -1,6 +1,7 @@
 import { getActivityById } from "@/data/activities";
 import { notFound } from "next/navigation";
 import WordSearch from "@/components/activities/WordSearch";
+import Crossword from "@/components/activities/Crossword";
 import PrintButton from "@/components/PrintButton";
 import Link from "next/link";
 
@@ -55,7 +56,14 @@ export default async function ActivityPage({ params }: Props) {
             />
           )}
 
-          {activity.type !== "word-search" && (
+          {activity.type === "crossword" && activity.clues && (
+            <Crossword
+              clues={activity.clues}
+              title={activity.title}
+            />
+          )}
+
+          {activity.type !== "word-search" && activity.type !== "crossword" && (
             <div className="text-center text-gray-400 py-16">
               <p className="text-4xl mb-3">🚧</p>
               <p className="font-medium">This activity is coming soon!</p>

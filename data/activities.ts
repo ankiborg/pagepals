@@ -106,6 +106,29 @@ export const activities: Activity[] = [
     description: "Find 10 different vehicles hidden in the grid.",
     tags: ["car", "truck", "plane", "train", "bike", "bus", "boat", "rocket", "scooter", "ship"],
   },
+  {
+    id: "crossword-animals-easy",
+    title: "Animal Crossword",
+    type: "crossword",
+    theme: "animals",
+    ageMin: 6,
+    ageMax: 10,
+    difficulty: "easy",
+    generated: true,
+    description: "Simple crossword puzzle featuring animal names.",
+    clues: {
+      across: [
+        { number: 1, clue: "Man's best friend", answer: "DOG" },
+        { number: 4, clue: "Feline pet", answer: "CAT" },
+        { number: 6, clue: "Large gray animal with trunk", answer: "ELEPHANT" },
+      ],
+      down: [
+        { number: 1, clue: "Flies and quacks", answer: "DUCK" },
+        { number: 2, clue: "King of the jungle", answer: "LION" },
+        { number: 3, clue: "Hops and has long ears", answer: "RABBIT" },
+      ],
+    },
+  },
 ];
 
 export function getActivities(filters?: {
