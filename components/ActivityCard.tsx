@@ -25,7 +25,7 @@ interface ActivityCardProps {
 export default function ActivityCard({ activity }: ActivityCardProps) {
   return (
     <Link
-      href={`/activities/${activity.id}`}
+      href={`/activities/${activity.type}`}
       className="group block rounded-2xl border border-gray-100 bg-white p-5 shadow-sm transition hover:shadow-md hover:border-indigo-200"
     >
       <div className="flex items-start justify-between gap-2">
