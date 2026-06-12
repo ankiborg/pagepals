@@ -21,16 +21,4 @@ jobs:
       - uses: anthropics/claude-code-action@beta
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-
-      - name: Create pull request
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          BRANCH=$(git branch --show-current)
-          if [ "$BRANCH" != "master" ] && [ "$BRANCH" != "main" ]; then
-            gh pr create \
-              --title "$(gh issue view ${{ github.event.issue.number }} --json title -q .title)" \
-              --body "Closes #${{ github.event.issue.number }}" \
-              --base master \
-              --head "$BRANCH" || true
-          fi
+          direct_prompt: "Read CLAUDE.md for instructions. Always commit and push directly to master. Never create a branch or pull request."
